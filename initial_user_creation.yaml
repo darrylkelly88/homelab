@@ -1,0 +1,22 @@
+---
+- name: initial user creation
+  hosts: all
+  remote_user: root
+  tasks:
+    - name: create ansible user
+      user:
+        name: ansible
+        shell: /bin/bash
+        password: "{{ 'daz2309' | password_hash('sha512', 'mysalt') }}"
+        create_home: yes
+        generate_ssh_key: yes
+      register: user_created
+
+    - name: add ansible to sudoers
+      lineinfile:
+        dest: /etc/sudoers
+        line: 'ansible ALL=(ALL) NOPASSWD:ALL'
+        state: present
+      when: user_created.changed
+
+

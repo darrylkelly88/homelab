@@ -1,0 +1,17 @@
+---
+
+- name: deploy SWAG container 
+  hosts: webserver
+  tasks:
+
+    - name: Install Podman and related packages
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - podman
+        - podman-docker
+        - podman-plugins
+
+
+
