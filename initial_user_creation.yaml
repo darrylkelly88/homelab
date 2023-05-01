@@ -7,7 +7,7 @@
       user:
         name: ansible
         shell: /bin/bash
-        password: "{{ 'daz2309' | password_hash('sha512', 'mysalt') }}"
+        password: "{{ 'mysupersecretpassword' | password_hash('sha512', 'mysalt') }}"
         create_home: yes
         generate_ssh_key: yes
       register: user_created
